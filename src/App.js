@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+// App Component remains unchanged
+import React, { useState } from "react";
+import SplashScreen from "./Page/SplashScreen";
+import LandingPage from "./Page/LandingPage";
 
 function App() {
+  const [showSplash, setShowSplash] = useState(true);
+  const [isExiting, setIsExiting] = useState(false);
+
+  const handleSplashFinish = () => {
+    setIsExiting(true);
+    setTimeout(() => {
+      setShowSplash(false);
+    }, 1000);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="w-screen h-screen">
+      {showSplash ? (
+        <SplashScreen onFinish={handleSplashFinish} isExiting={isExiting} />
+      ) : (
+        <LandingPage />
+      )}
     </div>
   );
 }
